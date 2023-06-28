@@ -1,6 +1,7 @@
 alert('MARI MAIN TEBAK ANGKA!!!! BERSAMA MR. GEZ!!!');
 
 let mainLagi = true;
+const nomorAcak = Math.random();
 
 while (mainLagi) {
     let maximum = parseInt(prompt('Masukkan nilai maksimal!'));
@@ -9,18 +10,24 @@ while (mainLagi) {
     }
 
     const targetNum = Math.floor(Math.random() * maximum) + 1;
-    console.log(targetNum);
 
     let guess = parseInt(prompt('Isi tebakan pertama kamu!'));
-    const nomorAcak = Math.random();
     let attempts = 1;
 
     while (parseInt(guess) !== targetNum) {
         attempts++;
         if (guess > targetNum) {
-            guess = prompt('Terlalu tinggi! tebak lagi:');
+            if (guess - targetNum < 4) {
+                guess = prompt('Hampir, nilai yang kamu isi masih sedikit lebih tinggi!');
+            } else {
+                guess = prompt('Terlalu tinggi! Tebak lagi!');
+            }
         } else {
-            guess = prompt('Terlalu rendah! tebak lagi:');
+            if (targetNum - guess < 4) {
+                guess = prompt('Hampir, nilai yang kamu isi masih sedikit lebih rendah!');
+            } else {
+                guess = prompt('Terlalu rendah! Tebak lagi!');
+            }
         }
     }
 
@@ -32,4 +39,8 @@ while (mainLagi) {
 
 if (mainLagi === false) {
     alert('TERIMA KASIH TELAH BERMAIN!');
+
+    setTimeout(function() {
+        window.close();
+    }, 3000);
 }
